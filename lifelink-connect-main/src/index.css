@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* LifeLink Color System */
+    --background: 0 0% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Healing Green - Primary */
+    --primary: 142 71% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Soft Gray - Secondary */
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 20% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    /* Emergency Red - Destructive/Urgent */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Success Green (deeper) */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    /* Warning Amber */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 142 71% 45%;
+
+    --radius: 0.75rem;
+
+    /* Custom LifeLink tokens */
+    --healing-green: 142 71% 45%;
+    --emergency-red: 0 72% 51%;
+    --soft-gray: 210 20% 96%;
+    --navy: 222 47% 11%;
+    --charcoal: 220 9% 46%;
+
+    /* Shadows */
+    --shadow-card: 0 4px 20px -4px hsl(222 47% 11% / 0.08);
+    --shadow-button: 0 4px 14px -3px hsl(142 71% 45% / 0.4);
+    --shadow-urgent: 0 4px 14px -3px hsl(0 72% 51% / 0.4);
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 15%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 142 71% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 142 71% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  /* Page container for mobile-first */
+  .page-container {
+    @apply min-h-screen bg-background px-5 py-6 max-w-md mx-auto;
+  }
+
+  /* Card styles */
+  .lifelink-card {
+    @apply bg-card rounded-2xl p-5 border border-border;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Primary CTA button */
+  .btn-primary {
+    @apply w-full py-4 rounded-xl font-semibold text-base transition-all duration-200;
+    @apply bg-primary text-primary-foreground;
+    box-shadow: var(--shadow-button);
+  }
+
+  .btn-primary:hover {
+    @apply opacity-90 scale-[0.99];
+  }
+
+  .btn-primary:disabled {
+    @apply opacity-50 cursor-not-allowed;
+    box-shadow: none;
+  }
+
+  /* Urgent/Emergency button */
+  .btn-urgent {
+    @apply w-full py-4 rounded-xl font-semibold text-base transition-all duration-200;
+    @apply bg-destructive text-destructive-foreground;
+    box-shadow: var(--shadow-urgent);
+  }
+
+  .btn-urgent:hover {
+    @apply opacity-90 scale-[0.99];
+  }
+
+  /* Outline button */
+  .btn-outline {
+    @apply w-full py-4 rounded-xl font-semibold text-base transition-all duration-200;
+    @apply bg-transparent border-2 border-border text-foreground;
+  }
+
+  .btn-outline:hover {
+    @apply bg-secondary;
+  }
+
+  /* Input styles */
+  .lifelink-input {
+    @apply w-full px-4 py-4 rounded-xl bg-secondary border border-border text-foreground;
+    @apply text-lg font-medium placeholder:text-muted-foreground;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+    @apply transition-all duration-200;
+  }
+
+  /* Blood group button */
+  .blood-group-btn {
+    @apply px-4 py-3 rounded-xl font-bold text-base transition-all duration-200;
+    @apply bg-secondary text-foreground border-2 border-transparent;
+  }
+
+  .blood-group-btn.selected {
+    @apply bg-primary/10 text-primary border-primary;
+  }
+
+  /* Status badges */
+  .badge-eligible {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium;
+    @apply bg-primary/10 text-primary;
+  }
+
+  .badge-ineligible {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium;
+    @apply bg-warning/10 text-warning;
+  }
+
+  .badge-urgent {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold;
+    @apply bg-destructive text-destructive-foreground;
+  }
+
+  .badge-verified {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium;
+    @apply bg-primary text-primary-foreground;
+  }
+
+  /* OTP input */
+  .otp-input {
+    @apply w-14 h-14 text-center text-2xl font-bold rounded-xl bg-secondary border-2 border-border;
+    @apply focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20;
+    @apply transition-all duration-200;
+  }
+
+  /* Action card on homepage */
+  .action-card {
+    @apply lifelink-card flex items-center gap-4 cursor-pointer;
+    @apply hover:scale-[0.99] hover:border-primary/30 transition-all duration-200;
+  }
+
+  /* Modal overlay */
+  .modal-overlay {
+    @apply fixed inset-0 bg-navy/50 backdrop-blur-sm z-50;
+    @apply flex items-end justify-center;
+  }
+
+  .modal-content {
+    @apply bg-card w-full max-w-md rounded-t-3xl p-6 pb-8;
+    @apply animate-slide-up;
+  }
+}
+
+@layer utilities {
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-pulse-soft {
+    animation: pulseSoft 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseSoft {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+}
